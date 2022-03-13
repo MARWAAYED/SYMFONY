@@ -1,0 +1,74 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {{ad.title}}
+{% endblock %}
+
+
+{% block body %}
+
+
+    <div class="ad-title" style="background-image : url ( {{ ad.coverImage }} )">
+        <div class="container">
+            <h1>{{ad.title}}</h1>
+            <p>{{ad.introduction}}</p>
+            <p class="h2">
+                <strong> {{ad.rooms}} chambres </strong> pour 
+                <strong> {{ ad.preice }}&euro; </strong> par nuit
+            </p>
+            <a href="#" type="button" class="btn btn-primary">Reserver</a>
+        </div>
+    </div>
+
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 mb-3">
+                {{ ad.context }}
+
+                <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+                        <div class="carousel-indicators">
+                            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                        </div>
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                            <img src="..." class="d-block w-100" alt="...">
+                            </div>
+                            <div class="carousel-item">
+                            <img src="..." class="d-block w-100" alt="...">
+                            </div>
+                            <div class="carousel-item">
+                            <img src="..." class="d-block w-100" alt="...">
+                            </div>
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                        </div>
+            </div>
+            <div class="col">
+                <div class="row">
+                    <div class="col-4">
+                        <img src="https://cdn.bizneo.com/blog/wp-content/uploads/2021/09/Ressources-Humaines-RH-810x455.jpg" alt="Avatar" style="width :64px ;hight: 64px;">
+                    </div>
+
+                    <div class="col">
+                        <h3>Ayed Marwa</h3>
+                        <strong>3 annances</strong>
+                    </div>
+                </div>
+                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dignissimos, quisquam? Alias quod eum numquam. Quam fuga ab explicabo aliquid rerum!</p>
+                <p>Quibusdam harum fugit at eius ipsam. Tenetur, optio inventore commodi magnam est consectetur id animi minus modi cum aperiam obcaecati?</p>
+                <p>Explicabo itaque nihil quas debitis delectus. Ipsum repellendus animi exercitationem. Id temporibus inventore nihil et minus harum magnam quos odit.</p>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
