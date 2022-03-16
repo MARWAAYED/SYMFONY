@@ -8,6 +8,9 @@
         <h1 class="my-3">Voici les annances de nos hôtes!</h1>
         <div class="row">
             {% for Ad in ads %}
+
+                {% set url = path('ads_show', {'slug' : Ad.slug}) %}
+
                 <div class="col-md-4">
                     <div class="card bg-light mb-3">
                         <div class="card-header text-center">
@@ -16,15 +19,22 @@
                             <br>
                             <small>pas encore noté</small>
                         </div>
+
+                        <a href="{{ url }}">
                         <img src="{{ Ad.coverImage }}" alt = "Image de l'appartement" 
                         style="height:200px; width:100%; display: block">
+                        </a>
 
                         <div class="card-body">
-                            <h4 class="card-title">{{Ad.title}}</h4>
+                            <h4 class="card-title">
+                                <a href="{{ url }}">
+                                {{Ad.title}}
+                                </a>
+                            </h4>
                             <p class="card-text">
                                {{Ad.introduction}}
                             </p>
-                            <a href="#" class="btn btn-secondary">En savoir plus</a>
+                            <a href="{{ url }}" class="btn btn-secondary">En savoir plus</a>
                         </div>
                     </div>
                 </div>

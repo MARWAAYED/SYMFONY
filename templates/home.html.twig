@@ -32,10 +32,7 @@
                 <button type="button" class="btn btn-primary">Voir nos annances</button>
             </a>
         </div>
-
-
         <h2 class="row mt-5">Nos appartements stars</h2>
-
         <div class="row mt-5">
             <div class="col-md-4">
                 <div class="card bg-light mb-3">
@@ -43,7 +40,7 @@
                         3 chambres , <strong>49&euro; / nuit</strong> <br>
                         <small>pas encore noté</small>
                     </div>
-                    <img src="http://placehold.it/1000x400" alt = "Image de l'appartement" 
+                    <img src="https://www.orientation.com/articles/wp-content/uploads/2020/09/%C3%A9tudes_rh.jpg" alt = "Image de l'appartement" 
                     style="height:200px; width:100%; display: block">
 
                     <div class="card-body">
@@ -61,7 +58,7 @@
                         3 chambres , <strong>49&euro; / nuit</strong> <br>
                         <small>pas encore noté</small>
                     </div>
-                    <img src="http://placehold.it/1000x400" alt = "Image de l'appartement" 
+                    <img src="https://www.orientation.com/articles/wp-content/uploads/2020/09/%C3%A9tudes_rh.jpg" alt = "Image de l'appartement" 
                     style="height:200px; width:100%; display: block">
 
                     <div class="card-body">
@@ -79,7 +76,7 @@
                         3 chambres , <strong>49&euro; / nuit</strong> <br>
                         <small>pas encore noté</small>
                     </div>
-                    <img src="http://placehold.it/1000x400" alt = "Image de l'appartement" 
+                    <img src="https://www.orientation.com/articles/wp-content/uploads/2020/09/%C3%A9tudes_rh.jpg" alt = "Image de l'appartement" 
                     style="height:200px; width:100%; display: block">
 
                     <div class="card-body">
@@ -94,28 +91,27 @@
         </div>
         <h2>Nos propriétaires stars !!</h2>
         <div class= "row">
-            <div class="call">
+            <div class="cal-md-6">
                 <div class="card border-secondary mt-3">
                     <div class="cart-body">
                         <h4 class="card-title">Marwa Ayed</h4>
                         <hr>
                         <div class="card-text">
-                            <img src="https://cdn.bizneo.com/blog/wp-content/uploads/2021/09/Ressources-Humaines-RH-810x455.jpg" alt="Avatar de Marwa Ayed" class="float-left mr-3" style="width :264px ;hight: 264px;">
+                            <img src="https://digital-solutions.konicaminolta.fr/wp-content/uploads/2021/06/FR-20210608-GTC-2-ECM-EBK-LVF-2-l-optimisation-de-la-fonction-rh-par-la-digitalisation-1024x512-2.png"
+                            alt="Avatar de Marwa Ayed" class="float-left mr-3" style="width :264px ;hight: 264px;">
                             <p>presentation de propriétaires pour le contacté en direct si vous voulez</p>
                             <a href="#" class="btn btn-success float-right my-3">contacter</a>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class= "row">
-            <div class="call">
+            <div class="cal-md-6">
                 <div class="card border-secondary mt-3">
                     <div class="cart-body">
                         <h4 class="card-title">Marwa Ayed</h4>
                         <hr>
                         <div class="card-text">
-                            <img src="http://placehold.it/64x64" alt="Avatar de Marwa Ayed" class="float-left mr-3">
+                            <img src="https://digital-solutions.konicaminolta.fr/wp-content/uploads/2021/06/FR-20210608-GTC-2-ECM-EBK-LVF-2-l-optimisation-de-la-fonction-rh-par-la-digitalisation-1024x512-2.png" alt="Avatar de Marwa Ayed" class="float-left mr-3" style="width :264px ;hight: 264px;">
                             <p>presentation de propriétaires pour le contacté en direct si vous voulez</p>
                             <a href="#" class="btn btn-success float-right my-3">contacter</a>
                             <br>
@@ -124,62 +120,8 @@
                 </div>
             </div>
         </div>
-        <div class= "row">
-            <div class="call">
-                <div class="card border-secondary mt-3">
-                    <div class="cart-body">
-                        <h4 class="card-title">Marwa Ayed</h4>
-                        <hr>
-                        <div class="card-text">
-                            <img src="http://placehold.it/64x64" alt="Avatar de Marwa Ayed" class="float-left mr-3">
-                            <p>presentation de propriétaires pour le contacté en direct si vous voulez</p>
-                            <a href="#" class="btn btn-success float-right my-3">contacter</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
+
 <br>
-
-
-    {#
-        <h1>{{ title | upper }}</h1>
-        <h3> le titre est : {{title}} </h3>
-
-        <p>
-            c'est ma premiere page symfony</br>
-            comment allez vous!?
-        </p>
-
-
-        <a href="{{ path('hello', {'prenoms' : 'marwa' , 'age' : 31}) }}"> Allez voir Hello</a>
-
-
-        {% if age >= 18 %}
-            <p>vous etes un adulte</p>
-        {% elseif age >= 12 %}
-            <p>vous etes un adolescent</p>
-        {% else %}
-            <p>vous etes un enfant</p>
-        {% endif %}
-
-        <ul>
-            {% for compteur in 0..10 %}
-                <li>{{compteur}} </li>
-            {% endfor %}
-        </ul>
-
-        {% for prenoms, age in tableau %}
-            {% if loop.first %}
-                <strong>{{prenoms}} a {{age}} ans</strong>
-            {% elseif loop.last %}
-                <em>{{prenoms}} a {{age}} ans</em>
-            {% else %} 
-                <p>{{prenoms}} a {{age}} ans</p>
-            {% endif %}
-        {% endfor %}
-    #}
-
 
 {% endblock %}
