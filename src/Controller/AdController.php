@@ -5,6 +5,7 @@ namespace App\Controller;
 
 use App\Entity\Ad;
 use App\Form\AdType;
+use App\Entity\Image;
 use App\Repository\AdRepository;
 use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\HttpFoundation\Request;
@@ -23,8 +24,6 @@ class AdController extends AbstractController
      */
     public function index(AdRepository $repo): Response
     {
-        //$repo = $this->getDoctrine()->getRepository(Ad::class);
-
         $ads = $repo->findAll();
 
         return $this->render('ad/index.html.twig', [
@@ -41,24 +40,46 @@ class AdController extends AbstractController
      * @return Response
      */
 
-    public function create(Request $request, ObjectManager $manager){
+    public function create(Request $request){
         $Ad = new Ad();
+
+        $image = new Image();
+
+        $image->setUrl('https://www.orientation.com/articles/wp-content/uploads/2020/09/%C3%A9tudes_rh.jpg')
+            ->setCaption('titre 1');
+        
+            
+        $image2 = new Image();
+
+        $image2->setUrl('https://www.orientation.com/articles/wp-content/uploads/2020/09/%C3%A9tudes_rh.jpg')
+            ->setCaption('titre 2');
+
+        $Ad->addImage($image)
+        ->addImage($image2);
 
         $form = $this->createForm(AdType::class, $Ad);
 
         $form->handleRequest($request);
         
+
         if($form->isSubmitted() && $form->isValid()){
-          $manager->persist($Ad);
-          $manager->flush();
-    
+            $manager = $this->getDoctrine()->getManager();
+            $manager->persist($Ad);
+            $manager->flush();
+
+            $this->addFlash(
+                'success',
+                "l'annance <strong>{$Ad->getTitle()}</strong> a été bien enregistrée"
+            );
+
+            return $this->redirectToRoute('ads_show',[
+                'slug' =>$Ad->getSlug()
+            ]);
         }
 
         return $this->render('ad/new.html.twig', [
             'form' => $form->createView()
-            
-
-        ]);
+            ]);
 
     }
 

@@ -2,6 +2,7 @@
 
 {% block title %} creation d'une annaces {% endblock %}
 
+{% form_theme form _self %}
 
 {% block body %}
     <div class="container">
@@ -21,6 +22,46 @@
 
 {% endblock %}
 
-{% block form_row %}
-    <h2>ok</h2>
+{% block _ad_images_widget %} 
+    <p>vous pouvez ajouter des images</p>
+
+    {{ form_widget(form) }}
+
+    <div class="form-group">
+    
+        <button type="button" id="add-image" class="btn btn-primary my-3">Ajouter une image</button>
+    </div>
+{% endblock %}
+
+{% block _ad_images_entry_row %}
+    {{ form_widget(form) }}
+{% endblock %}
+
+{% block _ad_images_entry_widget %}
+    <div class="form-group">
+        <div class="row">
+            <div class="col">
+                {{ form_widget(form.url) }}
+            </div>
+            <div class="col">
+                {{ form_widget(form.caption) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js">
+        $('#add-image').click(function(){
+            const index = $('#ad_images div.form-group').length;
+
+            const tmpl = $('#ad_images').data('prototype');
+            
+            console.log(tmpl);
+        
+
+        });
+    </script>
+
 {% endblock %}
