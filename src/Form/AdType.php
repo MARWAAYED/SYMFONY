@@ -6,20 +6,48 @@ use App\Entity\Ad;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\UrlType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\MoneyType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
 class AdType extends AbstractType
 {
+
+    /**
+     * configuration de base d'un champ
+     *
+     * @param string $label
+     * @param string $placeholder
+     * @return array
+     */
+    private function getCinfiguration($label, $placeholder){
+        return[
+            'label' => $label,
+            'attr' => ['placeholder' => $placeholder]
+        ];
+
+    }
+
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('title')
-            ->add('slug')
-            ->add('preice')
-            ->add('introduction')
-            ->add('context')
-            ->add('coverImage')
-            ->add('rooms')
-        ;
+            ->add('title', TextType::class,
+                $this->getCinfiguration("Titre","Tappez un titre pour votreannance"))
+            ->add('slug', TextType::class,
+                $this->getCinfiguration("Adresse web","Tappez l'adresse web (automatique)"))
+                ->add('coverImage', UrlType::class,
+                $this->getCinfiguration("URL de l'image","Donnez l'url de l'image de votre annance"))
+            ->add('introduction', TextType::class,
+            $this->getCinfiguration("Introduction","Donnez une description globale"))
+            ->add('context', TextareaType::class,
+                $this->getCinfiguration("decription detaillee","Donnez une description detaillee pour votre annance"))
+            ->add('rooms', IntegerType::class,
+            $this->getCinfiguration("Nombre de chambre","le nombre des chmbres disponible"))
+            ->add('preice', MoneyType::class,
+                $this->getCinfiguration("Prix par nuit","indiquez le prix pour une nuit"))
+            ;
     }
 
     public function configureOptions(OptionsResolver $resolver): void

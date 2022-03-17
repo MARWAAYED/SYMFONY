@@ -1,23 +1,26 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}creation d'une annaces{% endblock %}
+{% block title %} creation d'une annaces {% endblock %}
+
 
 {% block body %}
     <div class="container">
         <h1>creationd'une nouvelle annances</h1>
 
-        {{ form(form) }}
-
-
-       {#
         {{ form_start(form) }}
+
         {{ form_widget(form) }}
-        <button type="submit" class="btn btn-primary">Créer la nouvelle annace</button>
+
+        <button type="submit" class="btn btn-primary my-3">Créer la nouvelle annace</button>
+
+
         {{ form_end(form) }}
-        #}
+    
     </div>
 
 
+{% endblock %}
 
-
+{% block form_row %}
+    <h2>ok</h2>
 {% endblock %}
