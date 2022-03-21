@@ -4,14 +4,18 @@ namespace App\Entity;
 
 use Cocur\Slugify\Slugify;
 use App\Repository\AdRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
+
+use Symfony\Component\Validator\Constraints\Length;
+use Symfony\Component\validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass=AdRepository::class)
  * @ORM\HasLifecycleCallbacks
- * 
+ * @UniqueEntity(fields={"title"},message="une autre annonce possede deja ce titre, merci de le modifier")
  */
 class Ad
 {
@@ -24,6 +28,7 @@ class Ad
 
     /**
      * @ORM\Column(type="string", length=255)
+     * 
      */
     private $title;
 

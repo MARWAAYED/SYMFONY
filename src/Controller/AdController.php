@@ -7,7 +7,7 @@ use App\Entity\Ad;
 use App\Form\AdType;
 use App\Entity\Image;
 use App\Repository\AdRepository;
-use Doctrine\Persistence\ObjectManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -43,26 +43,18 @@ class AdController extends AbstractController
     public function create(Request $request){
         $Ad = new Ad();
 
-        $image = new Image();
-
-        $image->setUrl('https://www.orientation.com/articles/wp-content/uploads/2020/09/%C3%A9tudes_rh.jpg')
-            ->setCaption('titre 1');
-        
-            
-        $image2 = new Image();
-
-        $image2->setUrl('https://www.orientation.com/articles/wp-content/uploads/2020/09/%C3%A9tudes_rh.jpg')
-            ->setCaption('titre 2');
-
-        $Ad->addImage($image)
-        ->addImage($image2);
-
         $form = $this->createForm(AdType::class, $Ad);
 
         $form->handleRequest($request);
         
 
         if($form->isSubmitted() && $form->isValid()){
+            foreach($Ad->getImages() as $image) {
+                $image->setAd($Ad);
+                $manager->persist($image);
+            }
+
+
             $manager = $this->getDoctrine()->getManager();
             $manager->persist($Ad);
             $manager->flush();
@@ -77,10 +69,51 @@ class AdController extends AbstractController
             ]);
         }
 
+
         return $this->render('ad/new.html.twig', [
             'form' => $form->createView()
             ]);
+        }
 
+
+        /**
+         * affichage de formulaid de modification
+         * 
+         * @Route("/ads/{slug}/edit", name="ads_edit")
+         * @return Response
+         * 
+         */
+        public function edit(Ad $Ad, Request $request, EntityManagerInterface $manager){
+            $form = $this->createForm(AdType::class, $Ad);
+
+            $form->handleRequest($request);
+            
+            if($form->isSubmitted() && $form->isValid()){
+                foreach($Ad->getImages() as $image) {
+                    $image->setAd($Ad);
+                    $manager->persist($image);
+                }
+    
+    
+                $manager = $this->getDoctrine()->getManager();
+                $manager->persist($Ad);
+                $manager->flush();
+    
+                $this->addFlash(
+                    'success',
+                    "les modification de l'annance <strong>{$Ad->getTitle()}</strong> ont été bien enregistrée"
+                );
+    
+                return $this->redirectToRoute('ads_show',[
+                    'slug' =>$Ad->getSlug()
+                ]);
+            }
+
+            return $this->render('ad/edit.html.twig',
+            [ 'form' => $form->createView(),
+                'ad' => $Ad
+            ]
+        );
     }
 
     /**

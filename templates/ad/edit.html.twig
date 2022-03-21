@@ -1,29 +1,29 @@
 {% extends 'base.html.twig' %}
 
-{% block title %} creation d'une annaces {% endblock %}
+{% block title %} modification d'une annaces {% endblock %}
 
 {% form_theme form 'ad/_collection.html.twig' %}
 
 {% block body %}
     <div class="container">
-        <h1>creation d'une nouvelle annances</h1>
+        <h1>Modification d'une annance : {{ad.title}} </h1>
 
         {{ form_start(form) }}
 
         {{ form_widget(form) }}
 
-        <button type="submit" class="btn btn-primary my-3">Créer la nouvelle annace</button>
+        <button type="submit" class="btn btn-primary my-3">Enregistrer les modification</button>
 
 
         {{ form_end(form) }}
     
     </div>
-
-
 {% endblock %}
+
+
 
 {% block javascripts %}
 
-     <script src="/js/ad.js"></script>
+    <script src="/js/ad.js"></script>
 
 {% endblock %}
