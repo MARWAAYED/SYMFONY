@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Ad;
 use App\Form\ImageType;
+use App\Form\ApplicationType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -14,44 +15,29 @@ use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 
-class AdType extends AbstractType
+class AdType extends ApplicationType
 {
 
-    /**
-     * configuration de base d'un champ
-     *
-     * @param string $label
-     * @param string $placeholder
-     * @param array $options
-     * @return array
-     */
-    private function getCinfiguration($label, $placeholder, $options = []){
-        return array_merge([
-            'label' => $label,
-            'attr' => ['placeholder' => $placeholder]
-        ], $options);
-
-    }
 
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
             ->add('title', TextType::class,
-                $this->getCinfiguration("Titre","Tappez un titre pour votre annance"))
+                $this->getConfiguration("Titre","Tappez un titre pour votre annance"))
             ->add('slug', TextType::class,
-                $this->getCinfiguration("Adresse web","Tappez l'adresse web (automatique)", [
+                $this->getConfiguration("Adresse web","Tappez l'adresse web (automatique)", [
                     'required' => false
                 ]))
                 ->add('coverImage', UrlType::class,
-                $this->getCinfiguration("URL de l'image","Donnez l'url de l'image de votre annance"))
+                $this->getConfiguration("URL de l'image","Donnez l'url de l'image de votre annance"))
             ->add('introduction', TextType::class,
-            $this->getCinfiguration("Introduction","Donnez une description globale"))
+            $this->getConfiguration("Introduction","Donnez une description globale"))
             ->add('context', TextareaType::class,
-                $this->getCinfiguration("decription detaillee","Donnez une description detaillee pour votre annance"))
+                $this->getConfiguration("decription detaillee","Donnez une description detaillee pour votre annance"))
             ->add('rooms', IntegerType::class,
-            $this->getCinfiguration("Nombre de chambre","le nombre des chmbres disponible"))
+            $this->getConfiguration("Nombre de chambre","le nombre des chmbres disponible"))
             ->add('preice', MoneyType::class,
-                $this->getCinfiguration("Prix par nuit","indiquez le prix pour une nuit"))
+                $this->getConfiguration("Prix par nuit","indiquez le prix pour une nuit"))
             ->add(
                 'images', CollectionType::class,
                 [

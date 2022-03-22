@@ -2,16 +2,20 @@
 
 namespace App\Entity;
 
+use App\Entity\Ad;
 use Cocur\Slugify\Slugify;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\UserRepository;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
  * @ORM\HasLifecycleCallbacks
+ * @UniqueEntity(fields={"email"},message="un autre utilisateur s'est deja inscrit avec cette adresse email, merci de le modifier")
  */
 class User implements UserInterface
 {
@@ -24,21 +28,28 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank
      */
     private $firstName;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank
      */
     private $lastName;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Email(
+     *     message = "Ce email '{{ email }}' n'est pas un email valide.")
      */
     private $email;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Url(
+     *    message = "Ce url '{{ picture }}' n'est pas un url valide.",
+     * )
      */
     private $picture;
 
@@ -48,7 +59,16 @@ class User implements UserInterface
     private $hash;
 
     /**
+     * @Assert\EqualTo("hash", message="vous n'avez pas correctement confirmé votre mot de passe")
+     */
+    public $passwordConfirm;
+
+    /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Length(
+     *      min = 2,
+     *      minMessage = "Your first name must be at least 10 characters long",
+     *      )
      */
     private $introduction;
 
@@ -223,7 +243,7 @@ class User implements UserInterface
     }
 
     public function getPassword(){
-        return $thid->hash;
+        return $this->hash;
     }
 
     public function getSalt(){}
