@@ -66,7 +66,7 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\Length(
-     *      min = 2,
+     *      min = 10,
      *      minMessage = "Your first name must be at least 10 characters long",
      *      )
      */
