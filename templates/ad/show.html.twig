@@ -49,20 +49,23 @@
                         </div>
             </div>
             <div class="col">
-                <div class="row">
+                {% set a = ad.author %}
+                <div class="row mb-3 align-items-center">
                     <div class="col-4">
-                        <img src="https://cdn.bizneo.com/blog/wp-content/uploads/2021/09/Ressources-Humaines-RH-810x455.jpg" alt="Avatar" style="width :64px ;hight: 64px;">
+                        <a href="{{ path('user_show', {'slug': a.slug}) }}">
+                            <img src="{{ a.picture }}" alt="Avatar de {{ a.fullName}}" class="avatar avater-medium" >
+                        </a>
                     </div>
 
                     <div class="col">
-                        <h3>Ayed Marwa</h3>
-                        <strong>3 annances</strong>
+                    <a href="{{ path('user_show', {'slug': a.slug}) }}">
+                        <h3> {{ a.fullName}}</h3>
+                    </a>
+                        <strong>{{ a.ads | length }} annances</strong>
                     </div>
                 </div>
-                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dignissimos, quisquam? Alias quod eum numquam. Quam fuga ab explicabo aliquid rerum!</p>
-                <p>Quibusdam harum fugit at eius ipsam. Tenetur, optio inventore commodi magnam est consectetur id animi minus modi cum aperiam obcaecati?</p>
-                <p>Explicabo itaque nihil quas debitis delectus. Ipsum repellendus animi exercitationem. Id temporibus inventore nihil et minus harum magnam quos odit.</p>
-            </div>
+                {{ a.description | raw }}
+                </div>
         </div>
     </div>
 

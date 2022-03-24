@@ -12,3 +12,17 @@ div.ad-title h1, div.ad-title p{
     color: cadetblue;
     text-shadow: 3px 3px 3px rgba(0, 0, rgb(0, 0, 4), alpha);
 }
+
+.avatar {
+    max-width: 128px;
+    max-width: 128px;
+    border-radius: 50%;
+}
+.avatar-medium {
+    max-width: 64px;
+    max-height: 64px;
+}
+.avatar-mini {
+    max-width: 24px;
+    max-height: 24px;
+}

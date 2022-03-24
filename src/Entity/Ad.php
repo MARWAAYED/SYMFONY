@@ -63,12 +63,12 @@ class Ad
     private $rooms;
 
     /**
-     * @ORM\OneToMany(targetEntity=Image::class, mappedBy="ad", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="App\Entity\Image", mappedBy="ad", orphanRemoval=true)
      */
     private $images;
 
     /**
-     * @ORM\ManyToOne(targetEntity=user::class, inversedBy="ads")
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="ads")
      * @ORM\JoinColumn(nullable=false)
      */
     private $author;

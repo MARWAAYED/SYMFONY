@@ -1,0 +1,72 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Page de {{ user.fullName}} {% endblock %}
+
+{% block body %}
+  <div class="container">
+    <div class="row align-items-center">
+        <div class="col-3 text-center">
+            <img src="{{ user.picture }}" class="avatar mb-3" alt="Avatar de {{ user.fullName}}">
+            <br>
+            <span class="badge rounded-pill bg-primary">{{ user.ads | length }} annonces</span>
+        </div>
+        <div class="col-9">
+            <h1>{{ user.fullName}}</h1>
+            
+            {% if user is same as(app.user) %}
+                <div class="mt-3">
+                    <a href="{{ path('account_profile') }}" class="btn btn-primary mr-2 mb-2">Modifer mes informations</a>
+                    <a href="{{ path('account_password') }}" class="btn btn-secondary mr-2 mb-2">Modifer mon mot de passe</a>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+        {{user.description | raw}}
+        <hr>
+        <h2>Les annonces de {{ user.fullName}}</h2>
+
+        {% if user.ads | length >0 %}
+            <div class="row">
+                {% for ad in user.ads %}
+                    {% set url = path('ads_show', {'slug' : ad.slug}) %}
+
+                        <div class="col-md-4">
+                            <div class="card bg-light mb-3">
+                                <div class="card-header text-center">
+                                    {{ ad.rooms }} chambres ,
+                                    <strong>{{ ad.preice }}&euro; / nuit</strong>
+                                    <br>
+                                    <small>pas encore noté</small>
+                                </div>
+
+                                <a href="{{ url }}">
+                                <img src="{{ ad.coverImage }}" alt = "Image de l'appartement" 
+                                style="height:200px; width:100%; display: block">
+                                </a>
+
+                                <div class="card-body">
+                                    <h4 class="card-title">
+                                        <a href="{{ url }}">
+                                        {{ad.title}}
+                                        </a>
+                                    </h4>
+                                    <p class="card-text">
+                                    {{ad.introduction}}
+                                    </p>
+                                    <a href="{{ url }}" class="btn btn-secondary">En savoir plus</a>
+                                </div>
+                            </div>
+                        </div>
+                {% endfor %}
+            </div>
+            {% else %}
+                <div class="alert alert-warning">
+                    <p>
+                        <strong>{{ user.fullName}}</strong>
+                        n'a pas d'annonces sur le site
+                    </p>
+                </div>
+            {% endif %}
+
+  </div>
+{% endblock %}
