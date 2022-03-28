@@ -34,10 +34,12 @@ class AppFixtures extends Fixture
         $adminUser->setFirstName('marwa')
                   ->setLastName('ayed')
                   ->setEmail('marwaayed74@gmail.com')
-                  ->setHash($this->encoder->encodePassword($adminUser, 'password'))
+                  ->setHash($this->encoder->encodePassword($adminUser, 
+                                                           'password'))
                   ->setPicture('https://static.zerochan.net/Jinx.%28League.of.Legends%29.full.3522636.jpg')
                   ->setIntroduction($faker->sentence())
-                  ->setDescription('<p>' . join('</p><p>',$faker->paragraphs(3)) . '</P>')
+                  ->setDescription('<p>' . join('</p><p>',
+                        $faker->paragraphs(3)) . '</P>')
                   ->addUserRole($adminRole);
         $manager->persist($adminUser);
 

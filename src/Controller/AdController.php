@@ -12,7 +12,9 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\DependencyInjection\Loader\Configurator;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 
@@ -36,7 +38,7 @@ class AdController extends AbstractController
      * creation des annances
      * 
      * @Route("/ads/new", name="ads_create")
-     * 
+     * @IsGranted("ROLE_USER")
      * @return Response
      */
 
@@ -78,11 +80,14 @@ class AdController extends AbstractController
 
 
         /**
-         * affichage de formulaid de modification
+         * affichage de formulair de modification
          * 
          * @Route("/ads/{slug}/edit", name="ads_edit")
-         * @return Response
          * 
+         * @Security("is_granted('ROLE_USER') and user === Ad.getAuthor()", 
+         * message="cette annance ne vous appartient pas : vous ne pouvez pa la modifier")
+         * 
+         * @return Response
          */
         public function edit(Ad $Ad, Request $request, EntityManagerInterface $manager){
             $form = $this->createForm(AdType::class, $Ad);
