@@ -7,8 +7,7 @@
 
 {% block body %}
 
-
-    <div class="ad-title" style="background-image : url ( {{ ad.coverImage }} )">
+    <div class="ad-title" style="background-image : url ( {{ad.coverImage}} )">
         <div class="container">
             <h1>{{ad.title}}</h1>
             <p>{{ad.introduction}}</p>
@@ -17,6 +16,14 @@
                 <strong> {{ ad.preice }}&euro; </strong> par nuit
             </p>
             <a href="#" type="button" class="btn btn-primary">Reserver</a>
+
+            {% if app.user and app.user == ad.Author %}
+                <a href="{{ path('ads_edit', {'slug': ad.slug}) }}" class="btn btn-info">
+                Modifier l'annonce</a>
+                <a href="{{ path('ads_delete', {'slug': ad.slug}) }}" class="btn btn-danger"
+                onclick="return confirm(`Etes vous sur de vouloirsupprimer l'annonce :
+                {{ad.title}} ?`)">Supprimer l'annonce</a>
+            {% endif %}   
         </div>
     </div>
 
@@ -58,15 +65,15 @@
                     </div>
 
                     <div class="col">
-                    <a href="{{ path('user_show', {'slug': a.slug}) }}">
+                        <a href="{{ path('user_show', {'slug': a.slug}) }}">
                         <h3> {{ a.fullName}}</h3>
-                    </a>
+                        </a>
                         <strong>{{ a.ads | length }} annances</strong>
                     </div>
                 </div>
                 {{ a.description | raw }}
-                </div>
+            </div>
         </div>
     </div>
-
+    
 {% endblock %}
